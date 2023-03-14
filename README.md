@@ -22,7 +22,7 @@ http://localhost:3000/api/seed
 ```
 
 
-
+yarn
 # Production notes:
 
 Ejecutar este comando
@@ -31,5 +31,5 @@ docker compose -f docker-compose.prod.yml build
 ```
 
 ```
-docker buildx build --platform linux/amd64,linux/arm64 -t klerith/flutter-backend-teslo-shop:0.0.1 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t klerith/flutter-backend-teslo-shop:0.0.3 --push .
 ```
