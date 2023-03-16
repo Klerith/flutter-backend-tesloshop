@@ -102,6 +102,34 @@ export class ProductsService {
     }
   }
 
+  async findAllByTerm( term: string ) {
+
+    const terms = term.toUpperCase().split(' ');
+    let queryString = '';
+    let parameters = {};
+
+    terms.forEach((value, index) => {
+      if ( index !== 0 ) queryString += ' and ';
+
+      queryString += `UPPER(title) like :term${ index }`;
+      parameters[`term${ index }`] = `%${value}%`;
+    });  
+    
+    const queryBuilder = this.productRepository.createQueryBuilder('prod'); 
+
+    const products = await queryBuilder
+      .where( queryString, parameters )
+      .leftJoinAndSelect('prod.images','prodImages')
+      .getMany();
+    
+
+
+    if ( products.length === 0 ) 
+      throw new NotFoundException(`Products found with term ${ term }`);
+
+    return products;
+  }
+
 
 
   async update( id: string, updateProductDto: UpdateProductDto, user: User ) {

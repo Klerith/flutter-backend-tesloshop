@@ -34,9 +34,14 @@ export class ProductsController {
     return this.productsService.findAll( paginationDto );
   }
 
-  @Get(':term')
-  findOne(@Param( 'term' ) term: string) {
-    return this.productsService.findOnePlain( term );
+  @Get(':idOrSlug')
+  findOneByIdOrSlug(@Param( 'idOrSlug' ) term: string) {
+    return this.productsService.findOne( term );
+  }
+
+  @Get('all/:term')
+  findAllByTerm(@Param( 'term' ) term: string) {
+    return this.productsService.findAllByTerm( term );
   }
 
   @Patch(':id')
