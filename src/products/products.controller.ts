@@ -35,8 +35,12 @@ export class ProductsController {
   }
 
   @Get(':idOrSlug')
-  findOneByIdOrSlug(@Param( 'idOrSlug' ) term: string) {
-    return this.productsService.findOne( term );
+  async findOneByIdOrSlug(@Param( 'idOrSlug' ) term: string) {
+    const { images = [], ...rest } = await this.productsService.findOne( term );
+    return {
+      ...rest,
+      images: images.map( img => img.url )
+    }
   }
 
   @Get('all/:term')
