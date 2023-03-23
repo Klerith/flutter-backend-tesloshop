@@ -31,6 +31,6 @@ docker compose -f docker-compose.prod.yml build
 ```
 
 ```
-docker buildx build --platform linux/amd64,linux/arm64 -t klerith/flutter-backend-teslo-shop:1.0.0 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t klerith/flutter-backend-teslo-shop:1.0.1 --push .
 docker buildx build --platform linux/amd64,linux/arm64 -t klerith/flutter-backend-teslo-shop:latest --push .
 ```

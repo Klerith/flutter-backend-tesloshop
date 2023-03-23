@@ -5,9 +5,13 @@ export const fileNamer = ( req: Express.Request, file: Express.Multer.File, call
     // console.log({ file })
     if ( !file ) return callback( new Error('File is empty'), false );
 
-    const fileExtension = file.mimetype.split('/')[1];
+    const fileParts = file.originalname.split('.');
+    const fileExtension = fileParts[ fileParts.length - 1 ]
+    
+    const fileExtensionMipetype = file.mimetype.split('/')[1];    
+    const extension = (fileExtension) ? fileExtension : fileExtensionMipetype;
 
-    const fileName = `${ uuid() }.${ fileExtension }`;
+    const fileName = `${ uuid() }.${ extension }`;
 
 
     callback(null, fileName );
